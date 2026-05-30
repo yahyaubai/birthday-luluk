@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#1a1a2e">
+    <title>🎂 Special Gift For You</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+    <!-- Section 1: START -->
+    <section id="start-section" class="section active">
+        <div class="particles-container" id="particles"></div>
+        <div class="start-container">
+            <button class="start-btn" id="startBtn">START</button>
+        </div>
+    </section>
+    <!-- Section 2: Countdown 3-2-1 -->
+    <section id="countdown-section" class="section hidden">
+        <div class="countdown-container">
+            <span class="countdown-number" id="countdownNumber">3</span>
+        </div>
+    </section>
+    <!-- Section 3: Happy Birthday Text -->
+    <section id="opening-section" class="section hidden">
+        <div class="love-particles-container" id="loveParticles"></div>
+        <div class="birthday-text-container">
+            <h1 class="birthday-title" id="birthdayTitle">Happy Birthday<br>Dek Luluk</h1>
+        </div>
+    </section>
+    <!-- Section 4: PIN Input -->
+    <section id="pin-section" class="section hidden">
+        <div class="pin-container">
+            <div class="pin-lock-icon">🔒</div>
+            <h2 class="pin-title">Welcome, Dek Luluk</h2>
+            <p class="pin-subtitle">a little secret...</p>
+            <div class="pin-dots" id="pinDots">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+            <div class="pin-keypad" id="pinKeypad">
+                <button class="key-btn" data-num="1">1</button>
+                <button class="key-btn" data-num="2">2</button>
+                <button class="key-btn" data-num="3">3</button>
+                <button class="key-btn" data-num="4">4</button>
+                <button class="key-btn" data-num="5">5</button>
+                <button class="key-btn" data-num="6">6</button>
+                <button class="key-btn" data-num="7">7</button>
+                <button class="key-btn" data-num="8">8</button>
+                <button class="key-btn" data-num="9">9</button>
+                <button class="key-btn key-empty"></button>
+                <button class="key-btn" data-num="0">0</button>
+                <button class="key-btn key-delete" id="pinDelete">⌫</button>
+            </div>
+            <p class="pin-hint" id="pinHint"></p>
+        </div>
+    </section>
+    <!-- Section 4.5: Loading GIF after PIN -->
+    <section id="loading-section" class="section hidden">
+        <div class="loading-container">
+            <img src="assets/img/loading.gif" alt="Loading..." class="loading-gif">
+        </div>
+    </section>
+    <!-- Section 5: Vinyl + Love Letter -->
+    <section id="greeting-section" class="section hidden">
+        <div class="greeting-wrapper">
+            <!-- Amplop Surat Cinta -->
+            <div class="envelope-container" id="envelopeContainer">
+                <div class="envelope" id="envelope">
+                    <div class="envelope-flap"></div>
+                    <div class="envelope-body">
+                        <div class="envelope-heart">💌</div>
+                    </div>
+                </div>
+                <p class="swipe-hint" id="swipeHint">
+                    <span class="swipe-arrow">←</span> geser untuk membuka <span class="swipe-arrow">→</span>
+                </p>
+            </div>
+            <!-- Vinyl / Kaset Berputar -->
+            <div class="vinyl-container">
+                <div class="vinyl-disk" id="vinylDisk">
+                    <div class="vinyl-center">
+                        <div class="vinyl-hole"></div>
+                    </div>
+                    <div class="vinyl-rings"></div>
+                </div>
+                <div class="vinyl-arm" id="vinylArm"></div>
+                <p class="vinyl-label">🎵 playing...</p>
+            </div>
+        </div>
+    </section>
+    <!-- Section 6: Ucapan + Foto Kenangan -->
+    <section id="letter-section" class="section hidden">
+        <div class="stars-container" id="starsContainer"></div>
+        <div class="letter-wrapper">
+            <!-- Kertas Surat -->
+            <div class="letter-paper" id="letterPaper">
+                <div class="letter-content">
+                    <p class="letter-text" id="letterText"></p>
+                    <p class="letter-signature">— M. Yahya Ubaidillah 🌹</p>
+                </div>
+                <button class="close-letter-btn" id="closeLetterBtn">
+                    <span>✕</span> Tutup Surat
+                </button>
+            </div>
+            <!-- Gallery Foto Kenangan -->
+            <div class="gallery-container" id="galleryContainer">
+                <h3 class="gallery-title">📸 Kenangan Kita</h3>
+                <div class="gallery-wrapper">
+                    <button class="gallery-arrow arrow-prev" id="arrowPrev">&#8592;</button>
+                    <div class="gallery-track" id="galleryTrack">
+                        <div class="gallery-slide">
+                            <img src="assets/img/foto1.jpg" alt="Kenangan 1" class="gallery-img">
+                        </div>
+                        <div class="gallery-slide">
+                            <img src="assets/img/foto2.jpg" alt="Kenangan 2" class="gallery-img">
+                        </div>
+                        <div class="gallery-slide">
+                            <img src="assets/img/foto3.jpg" alt="Kenangan 3" class="gallery-img">
+                        </div>
+                        <div class="gallery-slide">
+                            <img src="assets/img/foto4.jpg" alt="Kenangan 4" class="gallery-img">
+                        </div>
+                        <div class="gallery-slide">
+                            <img src="assets/img/foto5.jpg" alt="Kenangan 5" class="gallery-img">
+                        </div>
+                        <div class="gallery-slide">
+                            <img src="assets/img/foto6.jpg" alt="Kenangan 6" class="gallery-img">
+                        </div>
+                        <div class="gallery-slide">
+                            <img src="assets/img/foto7.jpg" alt="Kenangan 7" class="gallery-img">
+                        </div>
+                        <div class="gallery-slide">
+                            <img src="assets/img/foto8.jpg" alt="Kenangan 8" class="gallery-img">
+                        </div>
+                        <div class="gallery-slide">
+                            <img src="assets/img/foto9.jpg" alt="Kenangan 9" class="gallery-img">
+                        </div>
+                        <div class="gallery-slide">
+                            <img src="assets/img/foto10.jpg" alt="Kenangan 10" class="gallery-img">
+                        </div>
+                        <div class="gallery-slide">
+                            <img src="assets/img/foto11.jpg" alt="Kenangan 11" class="gallery-img">
+                        </div>
+                        <div class="gallery-slide">
+                            <img src="assets/img/foto12.jpg" alt="Kenangan 12" class="gallery-img">
+                        </div>
+                    </div>
+                    <button class="gallery-arrow arrow-next" id="arrowNext">&#8594;</button>
+                </div>
+                <div class="gallery-dots" id="galleryDots">
+                    <span class="gdot active"></span>
+                    <span class="gdot"></span>
+                    <span class="gdot"></span>
+                    <span class="gdot"></span>
+                    <span class="gdot"></span>
+                    <span class="gdot"></span>
+                    <span class="gdot"></span>
+                    <span class="gdot"></span>
+                    <span class="gdot"></span>
+                    <span class="gdot"></span>
+                    <span class="gdot"></span>
+                    <span class="gdot"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Section 7: Love Pattern + Mystery Box -->
+    <section id="mystery-section" class="section hidden">
+        <div class="mystery-stars" id="mysteryStars"></div>
+        <div class="mystery-wrapper">
+            <div class="love-pattern-container">
+                <div class="love-pattern" id="lovePattern"></div>
+            </div>
+            <div class="mystery-text-container">
+                <p class="mystery-title">💝 Mystery Box is Coming...</p>
+                <p class="mystery-subtitle">
+                    "I wish you nothing but the best,<br>
+                    may every dream you hold close<br>
+                    find its way to you —<br>
+                    because you deserve all the love<br>
+                    this world has to offer."
+                </p>
+                <p class="mystery-note">— semoga suka dengan hadiahnya nanti 🎁</p>
+            </div>
+        </div>
+    </section>
+    <script src="js/particles.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
