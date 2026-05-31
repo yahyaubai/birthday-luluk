@@ -133,7 +133,7 @@ function initOpeningAnimation() {
 /* ==========================================
    PIN INPUT LOGIC
    ========================================== */
-const CORRECT_PIN = '240603';
+const CORRECT_PIN = '190426';
 let currentPin = '';
 function initPinSection() {
     const keypad = document.getElementById('pinKeypad');
