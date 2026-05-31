@@ -254,11 +254,90 @@ function spawnLoveBubble(container, hearts) {
    ========================================== */
 function initGreetingAnimation() {
     // Mulai musik saat masuk section ini
-    playMusic();
+    // playMusic();
 
     // Init swipe gesture pada amplop
     initEnvelopeSwipe();
 }
+
+/* ==========================================
+   MUSIC PLAYER CONTROLLER
+   ========================================== */
+(function() {
+    const audio = document.getElementById('bgMusic');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const iconPlay = document.getElementById('iconPlay');
+    const iconPause = document.getElementById('iconPause');
+    const progressBar = document.getElementById('progressBar');
+    const progressContainer = document.getElementById('progressBarContainer');
+    const timeCurrent = document.getElementById('timeCurrent');
+    const timeTotal = document.getElementById('timeTotal');
+    const vinylDisk = document.getElementById('vinylDisk');
+
+    if (!audio || !playPauseBtn) return;
+
+    let isPlaying = false;
+
+    // Format waktu mm:ss
+    function formatTime(sec) {
+        if (isNaN(sec)) return '0:00';
+        const m = Math.floor(sec / 60);
+        const s = Math.floor(sec % 60);
+        return m + ':' + (s < 10 ? '0' : '') + s;
+    }
+
+    // Play / Pause toggle
+    playPauseBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (isPlaying) {
+            audio.pause();
+            iconPlay.classList.remove('hidden');
+            iconPause.classList.add('hidden');
+            vinylDisk.classList.remove('spinning');
+            isPlaying = false;
+        } else {
+            audio.play().then(() => {
+                iconPlay.classList.add('hidden');
+                iconPause.classList.remove('hidden');
+                vinylDisk.classList.add('spinning');
+                isPlaying = true;
+            }).catch(() => {});
+        }
+    });
+
+    // Update progress bar & timer
+    audio.addEventListener('timeupdate', function() {
+        if (audio.duration) {
+            const percent = (audio.currentTime / audio.duration) * 100;
+            progressBar.style.width = percent + '%';
+            timeCurrent.textContent = formatTime(audio.currentTime);
+        }
+    });
+
+    // Set total time saat metadata ready
+    audio.addEventListener('loadedmetadata', function() {
+        timeTotal.textContent = formatTime(audio.duration);
+    });
+
+    // Klik progress bar untuk seek
+    progressContainer.addEventListener('click', function(e) {
+        const rect = this.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const percent = clickX / rect.width;
+        audio.currentTime = percent * audio.duration;
+    });
+
+    // Reset saat selesai
+    audio.addEventListener('ended', function() {
+        isPlaying = false;
+        iconPlay.classList.remove('hidden');
+        iconPause.classList.add('hidden');
+        vinylDisk.classList.remove('spinning');
+        progressBar.style.width = '0%';
+        timeCurrent.textContent = '0:00';
+    });
+})();
 
 /* ==========================================
    ENVELOPE SWIPE - Gesture buka amplop

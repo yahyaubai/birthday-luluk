@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#1a1a2e">
-    <title>🎂 Special Gift For You</title>
+    <title>🎂 Special Gift For Adek Luluk</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/animations.css">
 </head>
@@ -67,6 +67,35 @@
         </div>
     </section>
     <!-- Section 5: Vinyl + Love Letter -->
+    <!-- <section id="greeting-section" class="section hidden">
+        <div class="greeting-wrapper"> -->
+            <!-- Amplop Surat Cinta -->
+            <!-- <div class="envelope-container" id="envelopeContainer">
+                <div class="envelope" id="envelope">
+                    <div class="envelope-flap"></div>
+                    <div class="envelope-body">
+                        <div class="envelope-heart">💌</div>
+                    </div>
+                </div>
+                <p class="swipe-hint" id="swipeHint">
+                    <span class="swipe-arrow">←</span> geser untuk membuka <span class="swipe-arrow">→</span>
+                </p>
+            </div> -->
+            <!-- Vinyl / Kaset Berputar -->
+            <!-- <div class="vinyl-container">
+                <div class="vinyl-disk" id="vinylDisk">
+                    <div class="vinyl-center">
+                        <div class="vinyl-hole"></div>
+                    </div>
+                    <div class="vinyl-rings"></div>
+                </div>
+                <div class="vinyl-arm" id="vinylArm"></div>
+                <p class="vinyl-label">🎵 playing...</p>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Section 5: Vinyl + Music Player + Love Letter -->
     <section id="greeting-section" class="section hidden">
         <div class="greeting-wrapper">
             <!-- Amplop Surat Cinta -->
@@ -81,19 +110,43 @@
                     <span class="swipe-arrow">←</span> geser untuk membuka <span class="swipe-arrow">→</span>
                 </p>
             </div>
-            <!-- Vinyl / Kaset Berputar -->
-            <div class="vinyl-container">
-                <div class="vinyl-disk" id="vinylDisk">
-                    <div class="vinyl-center">
-                        <div class="vinyl-hole"></div>
+
+            <!-- Music Player Spotify Style -->
+            <div class="music-player" id="musicPlayer">
+                <div class="player-vinyl-wrapper">
+                    <div class="vinyl-disk" id="vinylDisk">
+                        <div class="vinyl-center">
+                            <div class="vinyl-hole"></div>
+                        </div>
+                        <div class="vinyl-rings"></div>
                     </div>
-                    <div class="vinyl-rings"></div>
                 </div>
-                <div class="vinyl-arm" id="vinylArm"></div>
-                <p class="vinyl-label">🎵 playing...</p>
+                <div class="player-info">
+                    <p class="player-song-title">🎵 A Song For You</p>
+                    <p class="player-artist">Special Birthday Playlist</p>
+                </div>
+                <div class="player-controls">
+                    <button class="play-pause-btn" id="playPauseBtn">
+                        <span class="icon-play" id="iconPlay">▶</span>
+                        <span class="icon-pause hidden" id="iconPause">❚❚</span>
+                    </button>
+                </div>
+                <div class="player-progress">
+                    <span class="time-current" id="timeCurrent">0:00</span>
+                    <div class="progress-bar-container" id="progressBarContainer">
+                        <div class="progress-bar" id="progressBar"></div>
+                    </div>
+                    <span class="time-total" id="timeTotal">0:00</span>
+                </div>
             </div>
         </div>
+
+        <!-- Audio Element (tidak autoplay) -->
+        <audio id="bgMusic" preload="metadata">
+            <source src="assets/audio/birthday.mp3" type="audio/mpeg">
+        </audio>
     </section>
+
     <!-- Section 6: Ucapan + Foto Kenangan -->
     <section id="letter-section" class="section hidden">
         <div class="stars-container" id="starsContainer"></div>
