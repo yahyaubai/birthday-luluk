@@ -254,15 +254,11 @@ function spawnLoveBubble(container, hearts) {
    ========================================== */
 function initGreetingAnimation() {
     // Mulai musik saat masuk section ini
-    // playMusic();
-
+    playMusic();
 
     // Init swipe gesture pada amplop
     initEnvelopeSwipe();
 }
-document.getElementById('startBtn').addEventListener('click', () => {
-    playMusic();
-});
 
 /* ==========================================
    ENVELOPE SWIPE - Gesture buka amplop
