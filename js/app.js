@@ -133,7 +133,7 @@ function initOpeningAnimation() {
 /* ==========================================
    PIN INPUT LOGIC
    ========================================== */
-const CORRECT_PIN = '240603';
+const CORRECT_PIN = '190426';
 let currentPin = '';
 function initPinSection() {
     const keypad = document.getElementById('pinKeypad');
@@ -254,11 +254,15 @@ function spawnLoveBubble(container, hearts) {
    ========================================== */
 function initGreetingAnimation() {
     // Mulai musik saat masuk section ini
-    playMusic();
+    // playMusic();
+
 
     // Init swipe gesture pada amplop
     initEnvelopeSwipe();
 }
+document.getElementById('startBtn').addEventListener('click', () => {
+    playMusic();
+});
 
 /* ==========================================
    ENVELOPE SWIPE - Gesture buka amplop
@@ -382,11 +386,60 @@ function initLetterAnimation() {
                 closeBtn.style.display = 'flex';
                 closeBtn.classList.add('animate-fadeIn');
                 closeBtn.addEventListener('click', () => {
-                    switchSection('letter-section', 'mystery-section');
+                    closeLetterWithAnimation();
                 });
+            // const closeBtn = document.getElementById('closeLetterBtn');
+            // if (closeBtn) {
+            //     closeBtn.style.display = 'flex';
+            //     closeBtn.classList.add('animate-fadeIn');
+            //     closeBtn.addEventListener('click', () => {
+            //         switchSection('letter-section', 'mystery-section');
+            //     });
             }
         }, 800);
     }, typingDuration);
+}
+
+/* ==========================================
+   CLOSE LETTER - Animasi surat tertutup
+   ========================================== */
+function closeLetterWithAnimation() {
+    const letterPaper = document.getElementById('letterPaper');
+    const closeBtn = document.getElementById('closeLetterBtn');
+
+    // Sembunyikan tombol
+    if (closeBtn) closeBtn.style.display = 'none';
+
+    // Buat overlay gelap
+    const overlay = document.createElement('div');
+    overlay.className = 'close-overlay';
+    document.body.appendChild(overlay);
+
+    // Buat amplop yang akan muncul
+    const envelope = document.createElement('div');
+    envelope.className = 'closing-envelope';
+    envelope.innerHTML = `
+        <div class="ce-body"></div>
+        <div class="ce-flap"></div>
+    `;
+    document.body.appendChild(envelope);
+
+    // Step 1: Surat melipat & mengecil
+    if (letterPaper) letterPaper.classList.add('closing');
+    requestAnimationFrame(() => overlay.classList.add('show'));
+
+    // Step 2: Amplop muncul "menelan" surat
+    setTimeout(() => {
+        envelope.classList.add('show');
+    }, 700);
+
+    // Step 3: Bersihkan & pindah section
+    setTimeout(() => {
+        overlay.remove();
+        envelope.remove();
+        if (letterPaper) letterPaper.classList.remove('closing');
+        switchSection('letter-section', 'mystery-section');
+    }, 1900);
 }
 
 /* ==========================================

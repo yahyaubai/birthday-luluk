@@ -397,10 +397,261 @@ html, body {
         font-size: 1.6rem;
     }
 }
+
+/* ==========================================
+   ENVELOPE - Enhanced Love Letter
+   ========================================== */
+.envelope-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    position: relative;
+}
+
+/* Glow ring */
+.envelope-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,45,149,0.3) 0%, transparent 70%);
+    animation: glowPulse 2.5s ease-in-out infinite;
+    z-index: 0;
+}
+
+@keyframes glowPulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+    50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+}
+
+/* Amplop utama */
+.envelope {
+    width: 200px;
+    height: 145px;
+    position: relative;
+    cursor: grab;
+    transition: transform 0.3s ease;
+    filter: drop-shadow(0 8px 25px rgba(255, 45, 149, 0.5));
+    animation: envelopeFloat 3s ease-in-out infinite;
+    z-index: 2;
+}
+
+.envelope:active { cursor: grabbing; transform: scale(0.97); }
+
+@keyframes envelopeFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+/* Flap */
+.envelope-flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 100px solid transparent;
+    border-right: 100px solid transparent;
+    border-top: 72px solid #e74c3c;
+    z-index: 3;
+    transform-origin: top center;
+    transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    filter: brightness(0.9);
+}
+
+.envelope-flap::after {
+    content: '';
+    position: absolute;
+    top: -72px;
+    left: -100px;
+    width: 200px;
+    height: 72px;
+    background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.1) 100%);
+}
+
+.envelope-flap.open {
+    transform: rotateX(180deg);
+}
+
+/* Body */
+.envelope-body {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 200px;
+    height: 120px;
+    background: linear-gradient(160deg, #ff6b6b, #e74c3c, #c0392b);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 
+        0 4px 20px rgba(231, 76, 60, 0.4),
+        inset 0 -3px 6px rgba(0,0,0,0.15);
+    overflow: hidden;
+}
+
+/* Pattern di body amplop */
+.envelope-body::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+        linear-gradient(45deg, transparent 48%, rgba(255,255,255,0.05) 49%, rgba(255,255,255,0.05) 51%, transparent 52%),
+        linear-gradient(-45deg, transparent 48%, rgba(255,255,255,0.05) 49%, rgba(255,255,255,0.05) 51%, transparent 52%);
+    background-size: 30px 30px;
+}
+
+/* Seal (stempel lilin) */
+.envelope-seal {
+    width: 44px;
+    height: 44px;
+    background: radial-gradient(circle, #ff2d95, #d4145a);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 
+        0 2px 8px rgba(255,45,149,0.6),
+        inset 0 -2px 4px rgba(0,0,0,0.2);
+    animation: sealPulse 2s ease-in-out infinite;
+    z-index: 4;
+}
+
+.seal-heart {
+    font-size: 1.3rem;
+    animation: heartbeat 1.2s ease-in-out infinite;
+}
+
+@keyframes sealPulse {
+    0%, 100% { box-shadow: 0 2px 8px rgba(255,45,149,0.6); }
+    50% { box-shadow: 0 2px 20px rgba(255,45,149,0.9), 0 0 30px rgba(255,45,149,0.4); }
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    15% { transform: scale(1.25); }
+    30% { transform: scale(1); }
+    45% { transform: scale(1.15); }
+}
+
+/* Paper peek (kertas mengintip saat dibuka) */
+.envelope-paper {
+    position: absolute;
+    top: -50px;
+    left: 20px;
+    width: 160px;
+    height: 90px;
+    background: linear-gradient(180deg, #fff9f0, #fff3e6);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(60px);
+    transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 1;
+    opacity: 0;
+}
+
+.envelope-flap.open ~ .envelope-body .envelope-paper {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.paper-text {
+    font-family: 'Georgia', serif;
+    font-size: 0.9rem;
+    color: #c0392b;
+    font-style: italic;
+}
+
+/* ==========================================
+   SPARKLES - Partikel di sekitar amplop
+   ========================================== */
+.envelope-sparkles {
+    position: absolute;
+    width: 260px;
+    height: 220px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.sparkle {
+    position: absolute;
+    font-size: 0.8rem;
+    opacity: 0;
+    animation: sparkleFloat 3s ease-in-out infinite;
+}
+
+.sparkle.s1 { top: 10%; left: 5%; animation-delay: 0s; color: #ff2d95; }
+.sparkle.s2 { top: 5%; right: 10%; animation-delay: 0.5s; color: #ff6b9d; }
+.sparkle.s3 { bottom: 20%; left: 0; animation-delay: 1s; color: #ffb6c1; }
+.sparkle.s4 { bottom: 15%; right: 5%; animation-delay: 1.5s; color: #ff2d95; }
+.sparkle.s5 { top: 40%; left: -5%; animation-delay: 2s; color: #fff; }
+.sparkle.s6 { top: 35%; right: -3%; animation-delay: 2.5s; color: #ff6b9d; }
+
+@keyframes sparkleFloat {
+    0%, 100% { opacity: 0; transform: translateY(0) scale(0.5); }
+    50% { opacity: 1; transform: translateY(-10px) scale(1.2); }
+}
+
+/* ==========================================
+   SWIPE HINT - Enhanced
+   ========================================== */
+.swipe-hint {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    animation: hintFadeIn 1.5s ease 1s both;
+}
+
+@keyframes hintFadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.swipe-arrow {
+    color: #ff2d95;
+    display: inline-block;
+    animation: swipeArrow 1.5s ease-in-out infinite;
+    text-shadow: 0 0 8px rgba(255,45,149,0.6);
+}
+
+@keyframes swipeArrow {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(5px); }
+}
+
+.swipe-arrow:first-child {
+    animation-direction: reverse;
+}
+
+/* ==========================================
+   ENVELOPE OPEN ANIMATION
+   ========================================== */
+@keyframes envelopeOpen {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+    100% { transform: scale(0.5) translateY(-50px); opacity: 0; }
+}
+
+@keyframes envelopeShake {
+    0%, 100% { transform: rotate(0deg); }
+    20% { transform: rotate(-3deg); }
+    40% { transform: rotate(3deg); }
+    60% { transform: rotate(-2deg); }
+    80% { transform: rotate(2deg); }
+}
+
 /* ==========================================
    SECTION 5: VINYL + LOVE LETTER
    ========================================== */
-#greeting-section {
+/* #greeting-section {
     background: linear-gradient(180deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
 }
 
@@ -413,10 +664,10 @@ html, body {
     z-index: 5;
     width: 100%;
     padding: 20px;
-}
+} */
 
 /* Amplop */
-.envelope-container {
+/* .envelope-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -481,10 +732,10 @@ html, body {
     color: #ff2d95;
     animation: swipeArrow 1.5s ease-in-out infinite;
     display: inline-block;
-}
+} */
 
 /* Vinyl Disk */
-.vinyl-container {
+/* .vinyl-container {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -557,7 +808,7 @@ html, body {
     font-size: 0.8rem;
     letter-spacing: 2px;
     animation: glowText 2s ease-in-out infinite;
-}
+} */
 
 /* ==========================================
    SECTION 6: SURAT + GALLERY
@@ -819,6 +1070,117 @@ html, body {
 }
 .close-letter-btn.hidden-btn {
     display: none;
+}
+
+/* ==========================================
+   ANIMASI TUTUP SURAT
+   ========================================== */
+.letter-paper {
+    transform-origin: center center;
+    transition: none;
+}
+
+/* Animasi surat melipat & mengecil saat ditutup */
+.letter-paper.closing {
+    animation: letterClose 1s cubic-bezier(0.7, 0, 0.84, 0) forwards;
+}
+
+@keyframes letterClose {
+    0% {
+        transform: scale(1) rotateX(0deg) translateY(0);
+        opacity: 1;
+    }
+    30% {
+        transform: scale(1.03) rotateX(0deg) translateY(0);
+        opacity: 1;
+    }
+    60% {
+        transform: scale(0.85) rotateX(-25deg) translateY(20px);
+        opacity: 0.9;
+    }
+    100% {
+        transform: scale(0.3) rotateX(-80deg) translateY(120px);
+        opacity: 0;
+    }
+}
+
+/* Amplop muncul kembali untuk "menelan" surat */
+.closing-envelope {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    height: 145px;
+    transform: translate(-50%, -50%) scale(0);
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.closing-envelope.show {
+    animation: envelopeReappear 1.2s ease forwards;
+}
+
+@keyframes envelopeReappear {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
+    }
+    40% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+    70% {
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(0.4) rotate(-8deg);
+        opacity: 0;
+    }
+}
+
+.closing-envelope .ce-body {
+    position: absolute;
+    bottom: 0;
+    width: 200px;
+    height: 120px;
+    background: linear-gradient(160deg, #ff6b6b, #e74c3c, #c0392b);
+    border-radius: 6px;
+    box-shadow: 0 4px 25px rgba(231, 76, 60, 0.6);
+}
+
+.closing-envelope .ce-flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 100px solid transparent;
+    border-right: 100px solid transparent;
+    border-top: 72px solid #e74c3c;
+    z-index: 3;
+    transform-origin: top center;
+    transform: rotateX(180deg);
+    animation: flapCloseSeal 0.5s ease 0.4s forwards;
+}
+
+@keyframes flapCloseSeal {
+    to { transform: rotateX(0deg); filter: brightness(0.9); }
+}
+
+/* Overlay gelap halus saat transisi */
+.close-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0);
+    z-index: 9998;
+    pointer-events: none;
+    transition: background 0.6s ease;
+}
+
+.close-overlay.show {
+    background: rgba(15, 23, 42, 0.85);
 }
 
 /* ==========================================
